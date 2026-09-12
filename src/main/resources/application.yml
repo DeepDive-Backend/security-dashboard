@@ -18,6 +18,16 @@ spring:
 
     open-in-view: false
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+
+  endpoint:
+    health:
+      show-details: always
+
 logging:
   level:
     org.hibernate.SQL: debug

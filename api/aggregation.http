@@ -1,0 +1,7 @@
+@host = http://localhost:8080
+
+### 이벤트 유형 집계 조회 JPQL
+GET {{host}}/aggregation/event-type?type=JPQL
+
+### 이벤트 유형 집계 조회 NATIVE
+GET {{host}}/aggregation/event-type?type=NATIVE

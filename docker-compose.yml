@@ -20,20 +20,62 @@ services:
       timeout: 5s
       retries: 10
 
+  mysqld-exporter:
+    image: prom/mysqld-exporter:latest
+    container_name: security-dashboard-mysqld-exporter
+    command:
+      - "--config.my-cnf=/tmp/.my.cnf"
 
-  app:
-    build:
-      dockerfile: Dockerfile
-
-    container_name: security-dashboard-app
+    volumes:
+      - ./mysql-exporter/.my.cnf:/tmp/.my.cnf:ro
 
     ports:
-      - "8080:8080"
+      - "9104:9104"
 
     depends_on:
       mysql:
         condition: service_healthy
 
+  app:
+      build:
+        dockerfile: Dockerfile
+
+      container_name: security-dashboard-app
+
+      ports:
+        - "8080:8080"
+
+      depends_on:
+        mysql:
+          condition: service_healthy
+
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: security-dashboard-prometheus
+
+    ports:
+      - "9090:9090"
+
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+    depends_on:
+      - app
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: security-dashboard-grafana
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+    depends_on:
+      - prometheus
 
 volumes:
   mysql-data:
+  grafana-data:
