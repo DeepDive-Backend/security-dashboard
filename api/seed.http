@@ -1,0 +1,4 @@
+@host = http://localhost:8080
+
+### 50만 건 Seed
+POST {{host}}/seed/500000
