@@ -49,6 +49,14 @@ services:
         mysql:
           condition: service_healthy
 
+  redis:
+    image: redis:7-alpine
+    container_name: security-dashboard-redis
+
+    ports:
+      - "6379:6379"
+
+    restart: unless-stopped
 
   prometheus:
     image: prom/prometheus:latest
