@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: security-dashboard
+
+  datasource:
+    url: jdbc:mysql://mysql:3306/security_dashboard
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        format_sql: true
+
+    open-in-view: false
+
+logging:
+  level:
+    org.hibernate.SQL: debug
