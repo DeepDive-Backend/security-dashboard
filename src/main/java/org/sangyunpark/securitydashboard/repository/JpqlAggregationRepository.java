@@ -17,7 +17,7 @@ public class JpqlAggregationRepository implements AggregationRepository {
     @Override
     public List<EventTypeCount> countByEventType() {
         return em.createQuery("""
-                    select new org.sangyunpark.securitydashboard.repository.dto.EventTypeCount(
+                    select new org.sangyunpark.securitydashboard.dto.EventTypeCount(
                         e.eventType,
                         count(e)
                     )
@@ -30,7 +30,7 @@ public class JpqlAggregationRepository implements AggregationRepository {
     @Override
     public List<HourlyEventCount> countByHour() {
         return em.createQuery("""
-                    select new org.sangyunpark.securitydashboard.repository.dto.HourlyEventCount(
+                    select new org.sangyunpark.securitydashboard.dto.HourlyEventCount(
                         hour(e.eventTime),
                         count(e)
                     )
