@@ -1,0 +1,1 @@
+CREATE INDEX idx_security_event_event_type ON security_event (event_type);
